@@ -1,39 +1,44 @@
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
-function App() {
- const age = 11;
-  return (
-    <div className='App'>
-      {age>=18 ? <h1>OVERAGE</h1> : <h1>Under Age </h1>}
+function App(){
 
-      <User name="Bo" age={21} email= "Bt@email.com"/>
-      <User name="Lars" age={88} email= "LL@email.com"/>
-      <User name="Aven" age={44} email= "AV@email.com"/>
-      <Jobs salary={22900} position="VD" company= "ATAT"/>
+    const [todoList, setTodoList] = useState([]);
+    const [newTask, setNewTask] = useState("");
+    const handleChange = (event) => {
+        setNewTask(event.target.value);
+    };
+    const addTask = () => {
 
-    </div>
-  );
+        const task = {
+            id:todoList.length === 0 ? 1 : todoList[todoList.length -1].id + 1,
+            taskName: newTask,
+        };
+        
+        setTodoList([...todoList,task]); 
+    };
+
+    const deleteTask = (taskName) => {
+        setTodoList(todoList.filter((task) => task !== taskName));
+    };
+
+    return (
+        <div className="App">
+            <div className="addTask">
+                <input onChange={handleChange}/>
+                <button onClick={addTask} >Add Task</button>
+            </div>
+            <div className="list"></div>
+                {todoList.map((task) =>{
+                    return (
+                        <div>
+                        <h1>{task.taskName}</h1>
+                        <button onClick={() => deleteTask(task)}>X</button>
+                        </div>
+                        );
+                })}
+        </div>
+    );
 }
-
-
-const User = (props) =>{
-  return(
-    <div>
-    <h1>{props.name}</h1>
-    <h2>{props.email}</h2>
-    <h3>{props.age}</h3>
-    </div>
-  );
-};
-const Jobs = (props) =>{
-  return(
-    <div>
-    <h1>{props.salary}</h1>
-    <h2>{props.position}</h2>
-    <h3>{props.company}</h3>
-    </div>
-  );
-};
-
 
 export default App;
