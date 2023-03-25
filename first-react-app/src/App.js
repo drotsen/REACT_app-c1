@@ -1,43 +1,24 @@
-import "./App.css";
+import "./App3.css";
 import { useState } from "react";
+import Axios from "axios";
 
-function App(){
-
-    const [todoList, setTodoList] = useState([]);
-    const [newTask, setNewTask] = useState("");
-    const handleChange = (event) => {
-        setNewTask(event.target.value);
+function App() {
+    const [generatedExcuse, setGeneratedExcuse] = useState("");
+    
+    const fetchExcuse = (excuse) => {
+        Axios.get(`https://excuser.herokuapp.com/v1/excuse/${excuse}/`).then((res) =>{
+            setGeneratedExcuse(res.data[0].excuse);
+        });
     };
-    const addTask = () => {
-
-        const task = {
-            id:todoList.length === 0 ? 1 : todoList[todoList.length -1].id + 1,
-            taskName: newTask,
-        };
-        
-        setTodoList([...todoList,task]); 
-    };
-
-    const deleteTask = (taskName) => {
-        setTodoList(todoList.filter((task) => task !== taskName));
-    };
-
+    
     return (
         <div className="App">
-            <div className="addTask">
-                <input onChange={handleChange}/>
-                <button onClick={addTask} >Add Task</button>
-            </div>
-            <div className="list"></div>
-                {todoList.map((task) =>{
-                    return (
-                        <div>
-                        <h1>{task.taskName}</h1>
-                        <button onClick={() => deleteTask(task)}>X</button>
-                        </div>
-                        );
-                })}
-        </div>
+           <div>Generate a Excuse</div>
+            <button onClick={() => fetchExcuse("party")}>Party </button>
+            <button onClick={() => fetchExcuse("family")}>Family </button>
+            <button onClick={() => fetchExcuse("office")}>Office </button>
+            <p> {generatedExcuse} </p>
+        </div>  
     );
 }
 

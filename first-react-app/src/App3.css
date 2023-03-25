@@ -1,0 +1,70 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  align-items: center;
+
+}
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.addTask{
+  height: 30vh;
+  background-color: aqua;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list{
+  
+  flex: 70%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 50px;
+  flex-direction: column;
+  
+}
+.task{
+  width: 500px;
+  height: 50px;
+  /* display: flex; */
+  margin: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.task button{
+  /* flex: 20%; */
+  width: 100px; 
+  height: 50%;
+  /* border: none; */
+  /* background-color: lightpink; */
+  /* border-top-right-radius: 8px; */
+  /* border-bottom-right-radius: 8px; */
+  margin-left: 20px; 
+  text-align: center; 
+  color: black;
+  cursor: pointer;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
